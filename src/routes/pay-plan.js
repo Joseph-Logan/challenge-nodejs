@@ -5,6 +5,7 @@ const Fee = require('../app/model/fee')
 const Serialize = require('../services/serialize-responses')
 const SingleSerialize = require('../app/validator/single-validation-error')
 const validateAmount = require('../services/validate-amount')
+const HandleLogs = require('../services/logs-responses')
 
 const getPlan = async (planId) => {
   try {
@@ -20,11 +21,13 @@ const payPlan = async (req, res) => {
     let plan = await getPlan(planId)
     let resp = await validateAmount(plan.amount, amount)
   
-    Fee.findOneAndUpdate({planId}, {amount: resp.amount}, { "new": true})
+    Fee.findOneAndUpdate({planId}, {amount: resp.amount}, {"new": true})
       .then(async doc => {
+        HandleLogs('Pay microservice', 'POST', 'Done', plan.email)
         return res.status(200).json({...await Serialize.serializeResponseFields(doc), ...resp})
       })
       .catch(async () => {
+        HandleLogs('Error while paying microservice', 'POST', 'Failed', plan.email)
         return res.status(SingleSerialize.statusCode).json(await SingleSerialize.serializeErrors(['Error to process payment']))
       })
      

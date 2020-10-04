@@ -1,3 +1,6 @@
+/**
+ * Author: Joseph Ramirez
+ */
 const { assert, expect } = require('chai')
 const request = require('supertest')
 const app = require('../app')
@@ -15,7 +18,7 @@ describe('create-plan without fails', () => {
     }
   
     request(app)
-      .post('/api/create-plan')
+      .post('/api/create-microcredit')
       .type('json')
       .send(data)
       .expect(201)
@@ -36,7 +39,7 @@ describe('pay-plan without fails', () => {
     }
 
     request(app)
-      .post('/api/pay-plan')
+      .post('/api/pay-microcredit')
       .type('json')
       .send(data)
       .expect(200)
@@ -64,7 +67,7 @@ describe('Errors to generate a new plan', () => {
     }
 
     request(app)
-      .post('/api/create-plan')
+      .post('/api/create-microcredit')
       .type('json')
       .send(data)
       .expect(400)
@@ -84,7 +87,7 @@ describe('Errors to generate when plan will be payed', () => {
     }
 
     request(app)
-      .post('/api/pay-plan')
+      .post('/api/pay-microcredit')
       .type('json')
       .send(data)
       .expect(400)
@@ -93,6 +96,31 @@ describe('Errors to generate when plan will be payed', () => {
         done()
       })
       .catch(err => done(err))
+  })
+})
+
+describe('Errors when send email', () => {
+  it('Validate field email, so in this case is required', done => {
+
+    let emailData = {
+      name: "Joseph Ramirez",
+      // email: "jarm06@gmail.com",
+      totalIngress: 4000,
+      sector: 1,
+      workYears: 20,
+      amount: 1260,
+      frecuency: 2
+    }
+
+    request(app)
+      .post('/api/info-microcredit')
+      .type('json')
+      .send(emailData)
+      .expect(400)
+      .then(resp => {
+        expect(resp.body.errors).to.have.be.a('array')
+        done()
+      })
   })
 })
 

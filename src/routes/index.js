@@ -9,27 +9,27 @@ const validateContentPayPlan = require('../app/validator/content-plan-pay-valida
 const route = require('express').Router();
 const createPlan = require('./create-plan');
 const payPlan = require('./pay-plan')
-const sendMail = require('./send-mail')
+const infoMicroCredit = require('./info-microcredit')
 
 route.post(
-  '/create-plan',
+  '/create-microcredit',
   validateContentPlan, 
   validateRequest, 
   createPlan
 );
 
 route.post(
-  '/pay-plan',
+  '/pay-microcredit',
   validateContentPayPlan,
   validateRequest,
   payPlan
 );
 
 route.post(
-  '/info-plan',
+  '/info-microcredit',
   validateContentPlan,
   validateRequest,
-  sendMail
+  infoMicroCredit
 )
 
 

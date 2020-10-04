@@ -6,6 +6,7 @@ const Fee = require('../app/model/fee')
 const Calculate = require('../services/calculate-fee')
 const Serialize = require('../services/serialize-responses')
 const SingleSerialize = require('../app/validator/single-validation-error')
+const HandleLogs = require('../services/logs-responses')
 
 /**
  * Passing params
@@ -21,10 +22,12 @@ const createPlan = async (req, res) => {
     plan.planId = await generateRandomId()
   
     if (plan.totalIngress < plan.fee) {
+      HandleLogs(await Serialize.handleErrorAmount(language), 'POST', 'Failed', data.email)
       return res.status(400).json(await Serialize.handleErrorAmount(language))
     }
-    let resp = await plan.save()
 
+    let resp = await plan.save()
+    HandleLogs('Micro service was payed successfully', 'POST', 'Done', data.email)
     return res.status(201).json(await Serialize.serializeResponseFields(resp, language))
   } catch (err) {
     return res.status(SingleSerialize.statusCode).json(await SingleSerialize.serializeErrors(['Error creating a microcredit']))

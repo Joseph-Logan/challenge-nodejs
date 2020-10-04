@@ -4,8 +4,9 @@
 const Mail = require('../config/mail')
 const HandleLogs = require('../services/logs-responses')
 const Serialize = require('../services/serialize-responses')
+const SingleSerialize = require('../app/validator/single-validation-error')
 
-const sendEmail = async (req, res) => {
+const infoMicroCredit = async (req, res) => {
   try {
     let data = req.body
     HandleLogs('Processing send email with infomation about microservice', 'POST', 'Processing', data.email)
@@ -14,8 +15,8 @@ const sendEmail = async (req, res) => {
     return res.status(200).json('Emial was sent successfully')
   } catch (err) {
     HandleLogs(`${err}`, 'POST', 'Failed', req.body.email)
-    throw new Error(err)
+    return res.status(500).json(SingleSerialize.serializeErrors(['Error sending email about microcredit']))
   }
 }
 
-module.exports = sendEmail
+module.exports = infoMicroCredit
