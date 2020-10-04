@@ -38,6 +38,8 @@ Metodo http: # POST
     * ## /api/info-microcredit
     * Se debe inyectar un header -> Content-Type: application-json
     * Raw -> JSON: Los mismos datos de crear credito
+    * Nota: Si deseas porbar esta funcionalidad si sera necesario hacerlo mediante local, esto debido a que al menos con gmail bloquea el acceso 
+    a las aplicaciones con fuerte potencial de acceso de informacion, la solucion seria agregar un addon como mailgun, pero conlleva un proceso con targetas de credito.
 
 * Obtener movimientos (LOGS de seguridad)
     * ## /api/info-logs
