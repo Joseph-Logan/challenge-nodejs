@@ -50,7 +50,7 @@ Metodo http: # POST
 La solución a continuación tiene mejor soluciones que se las explicare de manera de casos
 * El crear crédito y pedir el información que será enviada por correo pudieron estar separados en un micro servicio como tal (proyecto exclusivo con su propia db), en esta ocasión fueron integrados los 4 request
 * Para el envio de informacion a traves del correo electrónico, como solución pudo crear un micro servicio como tal (proyecto exclusivo con su propia db si así era necesario)
-* Como normas de seguridad no implementamos jwt, son necesarios claro y aunque el enunciado no lo requeria, es responsabilidad de cada desarrollador implementar las normas de seguridad a los endpoints.
+* Como normas de seguridad implementamos jwt, son necesarios claro y aunque el enunciado no lo requeria, es responsabilidad de cada desarrollador implementar las normas de seguridad a los endpoints.
 * La arquitectura dicta que cada microservicio tenga su propia db si asi lo requiere, no es buena práctica realizar lo siguiente
 Suponga tiene un microservicio A, B y desea crear uno nuevo "C" que requiere información de A y B
 Como solución podríamos pensar en realizar un request hacia A y luego hacia B, así se obtendrá la información, pero qué sucede si alguno de los 2 (A, B), deja de funcionar... errores en cadena.
