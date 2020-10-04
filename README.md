@@ -4,20 +4,27 @@
 
 Endpoints
 
+Metodo http: # GET
+* Get Token
+    * ## /api/get-token
+    Devolvera el token, el cual debera ser inyectado en las cabeceras
+    Authorization: <token>, sin agregar comillas o bearer, solamente el token
+
 Metodo http: # POST
 
 * Crear microcredito
     * ## /api/create-microcredit
+    * ## /api/create-microcredit?lg=es -> español
     * Se debe inyectar un header -> Content-Type: application-json
     * raw -> JSON {
       name: <name>,
       email: <example@gmail.com>,
       totalIngress: <4000>,
       sector: 1, -> 1 para publico, 2 privado
-      workYears: <30>,
-      amount: <1260>,
-      frecuency: <2>,
-      payTime: <6>
+      workYears: 3,
+      amount: 1260,
+      frecuency: 2, -> 1 mensual , 2 quincenal
+      payTime: 6
     }
 
 * Pagar microcredito
@@ -51,11 +58,12 @@ Como solución podríamos pensar en realizar un request hacia A y luego hacia B,
 Otra solución ** Sync ** y en esta ocasión suponga que vamos a evadir que se harán request hacia A y B, ahora nuestro servicio "C" tiene acceso a la DB de cada uno, por lo que se lograra solucionar en cierta manera, pero al final recaerá en no un microservicio en específico con su propia DB -> apuntamos al patrón de una db para cada microservicio
 
 ### Solución ** Async **, usamos el evento de bus, manejaremos cada vez que se dispare un evento en cualquiera de los microservicios A, B y C. Los pondremos a la escucha e inclusive los podremos manejar con prioridad en una pila de request como por ejemplo Rabbit MQ, NATS etc. Ahora cada microservicio tendrá su propia db y el Microservicio "C" también tendrá la informacion de A y B, debido al evento del bus que disparo acciones hacia el también, para realizar su operación en específico. Si eventualmente el microservicio A y B dejan de funcionar el seguirá avante.
+Lo mas evidente
 * Ventajas
-1- Microservicio más rápido 
-2- No se tiene dependencias de otros 
+    * 1- Microservicio más rápido 
+    * 2- No se tiene dependencias de otros 
 * Desventaja 
-1- Duplicación de información
+    * 1- Duplicación de información
 
 ## Carpeta test
 Dentro de ella encontrarán una serie de métodos que realice para unit testing. Para probarlos es necesario descargar el proyecto de manera local y ejecutar npm test
