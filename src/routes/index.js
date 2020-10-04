@@ -5,11 +5,12 @@
 const validateRequest = require('../app/validator/validate-request')
 const validateContentPlan = require('../app/validator/content-plan-validate')
 const validateContentPayPlan = require('../app/validator/content-plan-pay-validate')
+const validateContentInfoLogs = require('../app/validator/content-info-logs')
 
 const route = require('express').Router();
 const createPlan = require('./create-plan');
 const payPlan = require('./pay-plan')
-const infoMicroCredit = require('./info-microcredit')
+const { infoMicroCredit, infoProcess } = require('./info-microcredit')
 
 route.post(
   '/create-microcredit',
@@ -30,6 +31,13 @@ route.post(
   validateContentPlan,
   validateRequest,
   infoMicroCredit
+);
+
+route.post(
+  '/info-logs',
+  validateContentInfoLogs,
+  validateRequest,  
+  infoProcess
 )
 
 

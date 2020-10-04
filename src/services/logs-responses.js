@@ -10,6 +10,7 @@ const handleLogs = (action, method, process, executed_by) => {
       methods_used: method,
       type_process: process,
       executed_by: executed_by,
+      executed_at: new Date()
     }
     let logs = new Logs(logData)
     logs.save()
@@ -18,4 +19,16 @@ const handleLogs = (action, method, process, executed_by) => {
   }
 }
 
-module.exports = handleLogs
+const getAllLogsByEmail = async (email) => {
+  try {
+    let resp = await Logs.find({ executed_by: email }).exec();
+    return resp.length > 0 ? resp : 'Email not found' 
+  } catch (err) {
+    throw new Error(err)
+  }
+}
+
+module.exports = { 
+  handleLogs,
+  getAllLogsByEmail
+}
