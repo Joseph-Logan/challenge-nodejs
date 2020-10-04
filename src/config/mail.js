@@ -3,8 +3,8 @@ const emailTemplate = require('../utils/email-template')
 
 class Mail {
   mail = null
-  user = 'jarm069811@gmail.com'
-  pass = 'Lj1399061198'
+  user = ''
+  pass = ''
 
   constructor () {
     this.setTransport()
