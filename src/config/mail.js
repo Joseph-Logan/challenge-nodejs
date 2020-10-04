@@ -3,17 +3,16 @@ const emailTemplate = require('../utils/email-template')
 
 class Mail {
   mail = null
-  user = process.env.user
-  pass = process.env.pass
+  user = process.env.USER_EMAIL
+  pass = process.env.PASS_EMAIL
 
-  
   constructor () {
     this.setTransport()
   }
 
   setTransport () {
     this.mail = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: process.env.HOST_EMAIL,
       port: 587,
       secure: false,
       auth: {

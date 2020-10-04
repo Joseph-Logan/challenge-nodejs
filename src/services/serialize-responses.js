@@ -8,7 +8,7 @@ class SerializeResponse {
   constructor() {}
   
   async serializeResponseFields (data, language = 'en') {
-    const { amount, frecuency, payTime, fee = 0, planId = 0 } = data
+    const { amount, frecuency = 1, payTime = 12, fee = 0, planId = 0 } = data
     await Language.setLanguage(language)
   
     return {

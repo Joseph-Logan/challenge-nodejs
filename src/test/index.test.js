@@ -31,7 +31,7 @@ describe('create-plan without fails', () => {
 describe('pay-plan without fails', () => {
   it('responds with ', done => {
     let data = {
-      planId: "f5eadca7-50", // plan amount is 0
+      planId: '6df64e2c-10', // plan amount is 0
       amount: 1700
     }
 
@@ -80,7 +80,7 @@ describe('Errors to generate when plan will be payed', () => {
   it('validate field amount, because is required -> PAY PLAN', done => {
     let data = {
       // amount: 1260,
-      planId: 'f5eadca7-50'
+      planId: '6df64e2c-10'
     }
 
     request(app)

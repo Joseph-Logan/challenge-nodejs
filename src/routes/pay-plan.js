@@ -4,6 +4,7 @@
 const Fee = require('../app/model/fee')
 const Serialize = require('../services/serialize-responses')
 const SingleSerialize = require('../app/validator/single-validation-error')
+const validateAmount = require('../services/validate-amount')
 
 const getPlan = async (planId) => {
   try {
@@ -28,31 +29,8 @@ const payPlan = async (req, res) => {
       })
      
   } catch (err) {
+    console.log(err)
     return res.status(SingleSerialize.statusCode).json(await SingleSerialize.serializeErrors(['Error to process payment, ensure your planId is correctly']))
-  }
-}
-
-const validateAmount = async (amount, pay) => {
-  let result = amount - pay
-
-  if (amount === 0) {
-    return {
-      msg: 'Plan cancelled',
-      amount
-    }
-  } 
-
-  if (result < 0) {
-    return {
-      msg: 'Plan cancelled, has devolved money',
-      balance: Math.abs(result),
-      amount: 0
-    }
-  }
-
-  return {
-    msg: 'Plan payed successfully',
-    amount: result
   }
 }
 
