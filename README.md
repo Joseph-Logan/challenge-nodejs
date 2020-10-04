@@ -7,16 +7,37 @@ Endpoints
 Metodo http: # POST
 
 * Crear microcredito
-    * /api/create-microcredit
+    * ## /api/create-microcredit
+    * Se debe inyectar un header -> Content-Type: application-json
+    * raw -> JSON {
+      name: <name>,
+      email: <example@gmail.com>,
+      totalIngress: <4000>,
+      sector: 1, -> 1 para publico, 2 privado
+      workYears: <30>,
+      amount: <1260>,
+      frecuency: <2>,
+      payTime: <6>
+    }
 
 * Pagar microcredito
-    * /api/pay-microcredit
-
+    * ## /api/pay-microcredit
+    * Se debe inyectar un header -> Content-Type: application-json
+    * Raw -> JSON:  {
+      planId: <'6df64e2c-10', recuerda obtenerlo cuando creas el microprestamo>,
+      amount: 1700
+    }
 * Pedir informacion sobre el microcredito
-    * /api/info-microcredit
+    * ## /api/info-microcredit
+    * Se debe inyectar un header -> Content-Type: application-json
+    * Raw -> JSON: Los mismos datos de crear credito
 
 * Obtener movimientos (LOGS de seguridad)
-    * /api/info-logs
+    * ## /api/info-logs
+    * Se debe inyectar un header -> Content-Type: application-json
+    * Raw -> JSON: {
+        email: <example@gmail.com> -> email con el que se solicito el microprestamo
+    }
 
 ## Descripcion de la solucion
 La solución a continuación tiene mejor soluciones que se las explicare de manera de casos
@@ -35,3 +56,7 @@ Otra solución ** Sync ** y en esta ocasión suponga que vamos a evadir que se h
 2- No se tiene dependencias de otros 
 * Desventaja 
 1- Duplicación de información
+
+## Carpeta test
+Dentro de ella encontrarán una serie de métodos que realice para unit testing. Para probarlos es necesario descargar el proyecto de manera local y ejecutar npm test
+Tambien es requerido el .env con las credenciales, en este caso cualquier cosa me las solicitan. 
