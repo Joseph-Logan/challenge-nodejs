@@ -8,7 +8,7 @@ Metodo http: # GET
 * Get Token
     * ## /api/get-token
     Devolvera el token, el cual debera ser inyectado en las cabeceras
-    Authorization: <token>, sin agregar comillas o bearer, solamente el token
+    Authorization: <token token>, sin agregar comillas o bearer, solamente el token
 
 Metodo http: # POST
 
