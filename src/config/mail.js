@@ -6,6 +6,7 @@ class Mail {
   user = process.env.user
   pass = process.env.pass
 
+  
   constructor () {
     this.setTransport()
   }
