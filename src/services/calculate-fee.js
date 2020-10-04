@@ -5,7 +5,7 @@
  * */
 
 class Calculate {
-  interests = 0.16
+  interests = 0.18
   daysOfYear = 365
   defaultValue = 360 
   monthly = 1

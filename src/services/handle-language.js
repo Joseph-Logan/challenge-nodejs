@@ -47,8 +47,8 @@ class HandleLanguage {
     return this.languageSelected === this.defaultLanguage ? enFrecuency[frecuency - 1] : esFrecuency[frecuency - 1]
   }
 
-  async payTime () {
-    return this.languageSelected === this.defaultLanguage ? 'months' : 'meses'
+  async payTime (payTime) {
+    return this.languageSelected === this.defaultLanguage ? `${payTime} months` : `${payTime} meses`
   }
 
   getErrorAmount () {
