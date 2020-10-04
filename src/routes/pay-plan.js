@@ -3,6 +3,7 @@
  */
 const Fee = require('../app/model/fee')
 const Serialize = require('../services/serialize-responses')
+const SingleSerialize = require('../app/validator/single-validation-error')
 
 const getPlan = async (planId) => {
   try {
@@ -22,13 +23,12 @@ const payPlan = async (req, res) => {
       .then(async doc => {
         return res.status(200).json({...await Serialize.serializeResponseFields(doc), ...resp})
       })
-      .catch((err) => {
-        console.log(err)
-        return res.status(400).json({error: 'Error to process payment'})
+      .catch(async () => {
+        return res.status(SingleSerialize.statusCode).json(await SingleSerialize.serializeErrors(['Error to process payment']))
       })
      
   } catch (err) {
-    throw new Error(err)
+    return res.status(SingleSerialize.statusCode).json(await SingleSerialize.serializeErrors(['Error to process payment, ensure your planId is correctly']))
   }
 }
 

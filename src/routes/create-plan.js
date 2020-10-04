@@ -5,6 +5,7 @@ const { randomBytes } = require('crypto')
 const Fee = require('../app/model/fee')
 const Calculate = require('../services/calculate-fee')
 const Serialize = require('../services/serialize-responses')
+const SingleSerialize = require('../app/validator/single-validation-error')
 
 /**
  * Passing params
@@ -26,7 +27,7 @@ const createPlan = async (req, res) => {
 
     return res.status(201).json(await Serialize.serializeResponseFields(resp, language))
   } catch (err) {
-    throw new Error(err)
+    return res.status(SingleSerialize.statusCode).json(await SingleSerialize.serializeErrors(['Error creating a microcredit']))
   }
 }
 /**
