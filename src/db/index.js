@@ -9,12 +9,10 @@ const setup = async () => {
         useUnifiedTopology: true,
         useFindAndModify: false
     })
-  
-    let db = mongoose.connection;
-    db.once('open', () => console.log("Conexion Establecida con mongodb"))
-    db.on('error', (err) => console.log('MongoDB connection error: ', err))
-  
+
+    console.log("Conexion Establecida con mongodb")
   } catch (err) {
+    console.log('MongoDB connection error: ', err)
     throw new Error(err)
   }
 }

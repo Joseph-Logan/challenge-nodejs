@@ -1,11 +1,4 @@
-/**
- * Author: Joseph Ramirez
- */
-
-const {
-  validationResult
-}
-= require('express-validator');
+const { validationResult } = require('express-validator');
 const RequestValidationError = require('./request-validation-error');
 
 const validateRequest = (req, res, next) => {

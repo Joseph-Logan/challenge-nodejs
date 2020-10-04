@@ -1,3 +1,6 @@
+/**
+ * Author: Joseph Ramirez
+ */
 const Fee = require('../app/model/fee')
 const Serialize = require('../services/serialize-responses')
 

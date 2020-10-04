@@ -9,6 +9,7 @@ const validateContentPayPlan = require('../app/validator/content-plan-pay-valida
 const route = require('express').Router();
 const createPlan = require('./create-plan');
 const payPlan = require('./pay-plan')
+const sendMail = require('./send-mail')
 
 route.post(
   '/create-plan',
@@ -23,6 +24,13 @@ route.post(
   validateRequest,
   payPlan
 );
+
+route.post(
+  '/info-plan',
+  validateContentPlan,
+  validateRequest,
+  sendMail
+)
 
 
 route.get('*', (req, res) => {
