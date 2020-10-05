@@ -5,8 +5,8 @@ const validateContentPlan = [
       .exists()
       .withMessage('Field name is required')
       .trim()
-      .isLength({ min: 2, max: 50 })
-      .withMessage('Name must be between 4 and 20 characters'),
+      .isLength({ min: 4, max: 50 })
+      .withMessage('Name must be between 4 and 50 characters'),
   
     check('email')
       .exists()
