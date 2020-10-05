@@ -1,14 +1,17 @@
 /**
  * Author: Joseph Ramirez
  * here going to create methods that help us to make calculations depending of current salary -> totalIngress of user and the Bank interests
- * Based on BAC Forumulas https://www.baccredomatic.com/sites/default/files/formulas_de_calculos_y_ejemplos.pdf
+ * Based on Matematicas financieras de las operaciones bursales
  * */
 
+/*
+un préstamo de interés mensual del 20% de $1000 a 6 meses plazo , con una entidad bancaria ya que el interés se aplica a anual 
+y se solo se aplica a los 6 meses de plazo. el resultado es de =  $183.33 cuota mensual 
+*/
 class Calculate {
   interests = 0.18
-  daysOfYear = 365
-  defaultValue = 360 
   monthly = 1
+  anual = 12
 
   constructor () {
 
@@ -30,16 +33,18 @@ class Calculate {
   } 
   async levelQuotaCalculation (amount, payTime = 12) {
     try {
-      let interest = await this.monthlyInterest(payTime)
-      return amount / ((1 - Math.pow(1 + interest, -payTime)) / interest)
+      let interest = await this.monthlyInterest(amount, payTime)
+      // return amount / ((1 - Math.pow(1 + interest, -payTime)) / interest)
+      return (interest + amount) / payTime
     } catch (err) {
       throw new Error(err)
     }
   } 
   
-  async monthlyInterest (payTime) {
+  async monthlyInterest (amount, payTime) {
    try {
-    return this.interests / ((this.defaultValue * payTime) / this.daysOfYear)
+    // return this.interests / ((this.defaultValue * payTime) / this.daysOfYear)
+    return (amount * this.interests * (payTime / this.anual))
    } catch (err) {
      throw new Error(err)
    }
